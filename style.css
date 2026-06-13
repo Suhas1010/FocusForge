@@ -1,27 +1,7 @@
-/* 
-  ========================================
-  FocusForge Stylesheet 
-  ========================================
-*/
-
-/* Import Outfit font from Google Fonts for a modern, rounded look */
+/* Import Outfit font from Google Fonts */
 @import url('https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;600;800&display=swap');
 
-/* CSS Variables for consistent theming and easy color changes */
-:root {
-  --bg-color: #0f172a;
-  --bg-gradient: linear-gradient(135deg, #0f172a 0%, #1e1b4b 100%);
-  --surface: rgba(30, 41, 59, 0.7);
-  --surface-border: rgba(255, 255, 255, 0.1);
-  --primary: #8b5cf6;
-  --primary-hover: #a78bfa;
-  --secondary: #ec4899;
-  --text-main: #f8fafc;
-  --text-muted: #cbd5e1;
-  --font-family: 'Outfit', sans-serif;
-}
-
-/* Reset default browser margins and paddings */
+/* 1. RESET: Remove default browser spacing */
 * {
   box-sizing: border-box;
   margin: 0;
@@ -29,305 +9,210 @@
 }
 
 html {
-  font-size: 18px; /* Scales up all rem values slightly across the board */
+  font-size: 18px; /* Makes 1rem = 18px, scaling everything up */
 }
 
-/* Base Body Styles - Full height, flexible layout, custom font */
+/* 2. BODY: The main background of the page */
 body {
-  font-family: var(--font-family);
-  background: var(--bg-color);
-  background-image: var(--bg-gradient);
-  color: var(--text-main);
-  min-height: 100vh; /* Ensures the background covers the whole page */
-  display: flex;
+  font-family: 'Outfit', sans-serif;
+  background-color: #0f172a; /* Dark blue background */
+  background-image: linear-gradient(135deg, #0f172a 0%, #1e1b4b 100%);
+  color: #f8fafc; /* White text */
+  min-height: 100vh; /* Covers the whole screen height */
+  display: flex; /* Flexbox is needed here to push footer/content down */
   flex-direction: column;
-  overflow-x: hidden;
 }
 
-/* ========================================
-   Header Styles 
-   ======================================== */
+/* 3. HEADER: The top section */
 header {
-  padding: 3rem 2rem; /* Increased padding for breathing room */
+  padding: 3rem 2rem;
   text-align: center;
-  background: var(--surface);
-  backdrop-filter: blur(12px); /* Glassmorphism blur effect */
-  -webkit-backdrop-filter: blur(12px);
-  border-bottom: 1px solid var(--surface-border);
-  box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
+  background-color: rgba(30, 41, 59, 0.7); /* Slightly see-through background */
+  backdrop-filter: blur(12px); /* Makes the background behind it blurry */
+  border-bottom: 1px solid rgba(255, 255, 255, 0.1); /* Subtle white line */
 }
 
-/* Main Site Title */
 header h1 {
-  font-size: 3.5rem; /* Increased font size for better visibility */
+  font-size: 3.5rem;
   font-weight: 800;
-  background: linear-gradient(to right, var(--primary), var(--secondary));
+  /* This creates the purple-to-pink text color */
+  background: linear-gradient(to right, #8b5cf6, #ec4899);
+  background-clip: text;
   -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent; /* Makes the gradient text work */
+  color: transparent;
   margin-bottom: 0.5rem;
-  line-height: 1.2;
 }
 
-/* Header Description */
 header p {
-  color: var(--text-muted);
-  font-size: 1.4rem; /* Increased font size */
+  color: #cbd5e1; /* Light gray text */
+  font-size: 1.4rem;
 }
 
-/* Back links in the header */
 header a {
   display: inline-block;
   margin-top: 1rem;
-  color: var(--primary-hover);
+  color: #a78bfa; /* Light purple link */
   text-decoration: none;
-  font-weight: 600;
-  transition: color 0.3s;
 }
 
 header a:hover {
-  color: var(--text-main);
+  color: #f8fafc; /* Turns white when hovered */
 }
 
-/* ========================================
-   Main Content Layout 
-   ======================================== */
+/* 4. MAIN CONTAINER: Holds all the cards */
 main {
-  flex: 1; /* Pushes footer or bottom content down */
-  display: flex;
-  flex-wrap: wrap;
-  gap: 3.5rem; /* Gap between cards */
+  flex: 1; 
   padding: 6rem 2rem;
-  justify-content: center;
-  align-items: stretch;
   max-width: 1600px;
-  margin: 0 auto;
+  margin: 0 auto; /* Centers the container */
   width: 100%;
+  
+  /* Flexbox is used here to put cards side-by-side */
+  display: flex;
+  flex-wrap: wrap; /* Allows cards to wrap to the next line if screen is small */
+  gap: 3.5rem; /* Space between cards */
+  justify-content: center; /* Centers the cards horizontally */
 }
 
-/* ========================================
-   Section (Card) Styles 
-   ======================================== */
+/* 5. CARDS (Sections) */
 section {
-  background: var(--surface);
+  background-color: rgba(30, 41, 59, 0.7);
   backdrop-filter: blur(16px);
-  -webkit-backdrop-filter: blur(16px);
-  border: 1px solid var(--surface-border);
-  border-radius: 20px;
-  padding: 3rem; /* Increased padding inside cards */
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  border-radius: 20px; /* Rounded corners */
+  padding: 3rem;
   width: 100%;
-  max-width: 600px; /* Increased card size to make it wider and more readable */
-  box-shadow: 0 10px 30px -10px rgba(0, 0, 0, 0.3);
-  transition: transform 0.3s ease, box-shadow 0.3s ease, border-color 0.3s ease;
+  max-width: 600px; /* Maximum width of a card */
+  text-align: center;
+  
+  /* Flexbox used to align content inside the card */
   display: flex;
   flex-direction: column;
   align-items: center;
-  text-align: center;
+  
+  /* Smooth animation when hovered */
+  transition: transform 0.3s ease, border-color 0.3s ease;
 }
 
-/* Card Hover Animation */
+/* When you hover over a card... */
 section:hover {
-  transform: translateY(-8px); /* Lifts the card up slightly */
-  box-shadow: 0 20px 40px -10px rgba(0, 0, 0, 0.5);
-  border-color: rgba(139, 92, 246, 0.4);
+  transform: translateY(-8px); /* Moves it slightly up */
+  border-color: rgba(139, 92, 246, 0.4); /* Purple border appears */
 }
 
-/* Card Titles */
 section h2 {
-  font-size: 2.2rem; /* Increased heading size inside cards */
+  font-size: 2.2rem;
   margin-bottom: 1rem;
-  color: var(--text-main);
+  color: #f8fafc;
 }
 
-/* Card Paragraphs */
 section p {
-  color: var(--text-muted);
-  line-height: 1.6;
+  color: #cbd5e1;
+  font-size: 1.2rem;
   margin-bottom: 1.5rem;
-  font-size: 1.2rem; /* Increased paragraph text size */
 }
 
-/* Card Navigation Links/Buttons */
+/* Buttons inside the cards */
 section a {
-  margin-top: auto; /* Pushes the button to the bottom of the card */
-  display: inline-block;
+  margin-top: auto; /* Pushes the button to the bottom */
   padding: 0.8rem 1.8rem;
-  background: rgba(255, 255, 255, 0.05);
-  border: 1px solid var(--surface-border);
-  color: var(--text-main);
+  background-color: rgba(255, 255, 255, 0.05);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  color: #f8fafc;
   text-decoration: none;
   border-radius: 12px;
-  font-weight: 600;
-  font-size: 1.1rem;
-  transition: all 0.3s ease;
+  transition: background-color 0.3s ease;
 }
 
 section a:hover {
-  background: var(--primary);
-  border-color: var(--primary);
-  color: #fff;
-  transform: scale(1.05);
-  box-shadow: 0 10px 20px rgba(139, 92, 246, 0.3);
+  background-color: #8b5cf6; /* Turns purple */
+  border-color: #8b5cf6;
 }
 
-/* ========================================
-   Specific Typography Elements
-   ======================================== */
+/* 6. BIG NUMBERS (Timer & Streak) */
 h1#timerDisplay, h1#streakCount {
-  font-size: 6rem; /* Huge numbers for the timer and streak */
-  font-weight: 800;
-  margin: 2rem 0;
-  color: var(--primary-hover);
-  text-shadow: 0 0 30px rgba(139, 92, 246, 0.5);
+  font-size: 6rem; 
+  color: #a78bfa;
 }
 
-#quote {
-  font-size: 1.3rem; /* Slightly larger quote */
-  font-style: italic;
-  color: var(--text-main);
-  opacity: 0.9;
-}
-
-/* ========================================
-   Form Inputs
-   ======================================== */
+/* 7. INPUT BOXES */
 input[type="text"] {
   width: 100%;
   padding: 1.2rem;
-  background: rgba(15, 23, 42, 0.6);
-  border: 1px solid var(--surface-border);
+  background-color: rgba(15, 23, 42, 0.6);
+  border: 1px solid rgba(255, 255, 255, 0.1);
   border-radius: 12px;
-  color: var(--text-main);
+  color: #f8fafc;
   font-size: 1.1rem;
   margin-bottom: 1.2rem;
-  font-family: var(--font-family);
+  font-family: 'Outfit', sans-serif;
   outline: none;
-  transition: border-color 0.3s, box-shadow 0.3s;
 }
 
 input[type="text"]:focus {
-  border-color: var(--primary);
-  box-shadow: 0 0 0 4px rgba(139, 92, 246, 0.2);
+  border-color: #8b5cf6; /* Purple border when clicking the input */
 }
 
-input::placeholder {
-  color: var(--text-muted);
-}
-
-/* ========================================
-   Buttons
-   ======================================== */
+/* 8. BUTTONS */
 button {
-  background: linear-gradient(135deg, var(--primary), #6d28d9);
+  background-image: linear-gradient(135deg, #8b5cf6, #6d28d9);
   color: white;
   border: none;
   padding: 1rem 2rem;
   font-size: 1.1rem;
-  font-weight: 600;
   border-radius: 12px;
   cursor: pointer;
-  font-family: var(--font-family);
-  transition: all 0.3s ease;
   margin: 0.5rem;
-  box-shadow: 0 4px 15px rgba(139, 92, 246, 0.3);
+  transition: transform 0.3s ease;
 }
 
 button:hover {
-  transform: translateY(-3px);
-  box-shadow: 0 10px 25px rgba(139, 92, 246, 0.5);
+  transform: translateY(-3px); /* Moves up slightly */
 }
 
-button:active {
-  transform: translateY(0); /* Button press effect */
-}
-
-/* ========================================
-   Lists (Goals)
-   ======================================== */
+/* 9. GOALS LIST */
 ul {
-  list-style: none;
+  list-style: none; /* Removes bullet points */
   width: 100%;
   margin-top: 1rem;
 }
 
 li {
-  background: rgba(15, 23, 42, 0.6);
+  background-color: rgba(15, 23, 42, 0.6);
   padding: 1.2rem;
   border-radius: 12px;
   margin-bottom: 0.8rem;
+  border: 1px solid rgba(255, 255, 255, 0.1);
   display: flex;
   justify-content: space-between;
-  align-items: center;
-  border: 1px solid var(--surface-border);
-  transition: all 0.3s ease;
-  font-size: 1.1rem;
 }
 
-li:hover {
-  background: rgba(30, 41, 59, 0.9);
-  border-color: rgba(255, 255, 255, 0.2);
-  transform: translateX(5px);
-}
-
-/* ========================================
-   Custom Divs (GitHub Profile)
-   ======================================== */
+/* 10. GITHUB PROFILE DETAILS */
 #profileDetails {
   width: 100%;
   margin-top: 1rem;
-  background: rgba(15, 23, 42, 0.6);
+  background-color: rgba(15, 23, 42, 0.6);
   padding: 1.5rem;
   border-radius: 12px;
-  border: 1px solid var(--surface-border);
+  border: 1px solid rgba(255, 255, 255, 0.1);
   text-align: left;
 }
 
 #profileDetails img {
-  border-radius: 50%;
+  border-radius: 50%; /* Makes image circular */
   margin-bottom: 1rem;
-  border: 2px solid var(--primary);
+  border: 2px solid #8b5cf6;
 }
 
-#profileDetails h3 {
-  color: var(--text-main);
-  margin-bottom: 0.5rem;
-  font-size: 1.4rem;
-}
-
-#profileDetails p {
-  margin-bottom: 0.5rem;
-  font-size: 1.1rem;
-}
-
-/* ========================================
-   Responsive Breakpoints
-   ======================================== */
+/* 11. MOBILE & LARGE SCREEN ADJUSTMENTS */
 @media (max-width: 768px) {
-  header h1 {
-    font-size: 2.5rem;
-  }
-  
-  h1#timerDisplay, h1#streakCount {
-    font-size: 4rem; /* Scale down giant numbers on mobile */
-  }
-  
-  section {
-    padding: 2rem 1.5rem; /* Less padding on small screens */
-  }
+  header h1 { font-size: 2.5rem; }
+  h1#timerDisplay, h1#streakCount { font-size: 4rem; }
+  section { padding: 2rem 1.5rem; }
 }
 
-/* Extra Large Screens (Desktop) */
 @media (min-width: 1600px) {
-  html {
-    font-size: 22px; /* Scales up EVERYTHING proportionally for big monitors */
-  }
-  
-  main {
-    max-width: 1800px;
-    gap: 5rem;
-  }
-  
-  section {
-    max-width: 750px;
-    padding: 4rem;
-  }
+  html { font-size: 22px; }
+  main { max-width: 1800px; gap: 5rem; }
+  section { max-width: 750px; padding: 4rem; }
 }
