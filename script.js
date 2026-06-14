@@ -7,3 +7,16 @@ async function fetchQuote(){
     quote.innerText = data.quote;
 };
 fetchQuote();
+let goalInput = document.getElementById("goalInput");
+let addGoalBtn = document.getElementById("addGoalBtn");
+let goalList = document.getElementById("goalList");
+
+addGoalBtn.addEventListener("click",()=>{
+       if (goalInput.value === "") {
+    return;
+}
+   let li = document.createElement("li");
+   li.innerText =  goalInput.value;
+   goalList.append(li);
+   goalInput.value = "";
+})
