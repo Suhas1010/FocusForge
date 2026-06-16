@@ -10,13 +10,44 @@ fetchQuote();
 let goalInput = document.getElementById("goalInput");
 let addGoalBtn = document.getElementById("addGoalBtn");
 let goalList = document.getElementById("goalList");
+let goals = JSON.parse(localStorage.getItem("goals")) || [];
+goals.forEach((goal) => {
+    let li = document.createElement("li");
+    li.innerText = goal;
+    goalList.append(li);
+});
+addGoalBtn.addEventListener("click", () => {
 
-addGoalBtn.addEventListener("click",()=>{
-       if (goalInput.value === "") {
-    return;
-}
-   let li = document.createElement("li");
-   li.innerText =  goalInput.value;
-   goalList.append(li);
-   goalInput.value = "";
-})
+    if (goalInput.value === "") {
+        return;
+    }
+
+    let goalText = goalInput.value;
+
+    let li = document.createElement("li");
+    li.innerText = goalText;
+
+    let deleteBtn = document.createElement("button");
+    deleteBtn.innerText = "Delete";
+
+    deleteBtn.addEventListener("click", () => {
+
+        li.remove();
+
+        goals = goals.filter((goal) => goal !== goalText);
+
+        localStorage.setItem("goals", JSON.stringify(goals));
+
+    });
+
+    li.append(deleteBtn);
+
+    goalList.append(li);
+
+    goals.push(goalText);
+
+    localStorage.setItem("goals", JSON.stringify(goals));
+
+    goalInput.value = "";
+
+});
